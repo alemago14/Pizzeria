@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/05/2021 17:41:03 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pizzerias.Estadofactura" table="estadofactura" catalog="pizzeria" optimistic-lock="version">
+        <id name="idestadoFactura" type="int">
+            <column name="IDEstadoFactura" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="156" not-null="true" />
+        </property>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDEstadoFactura" not-null="true" />
+            </key>
+            <one-to-many class="pizzerias.Factura" />
+        </set>
+        <set name="detallepedidos" table="detallepedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDEstadoPedido" not-null="true" />
+            </key>
+            <one-to-many class="pizzerias.Detallepedido" />
+        </set>
+    </class>
+</hibernate-mapping>

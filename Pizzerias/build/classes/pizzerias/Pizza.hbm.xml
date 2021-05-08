@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/05/2021 17:41:03 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pizzerias.Pizza" table="pizza" catalog="pizzeria" optimistic-lock="version">
+        <id name="idpizza" type="int">
+            <column name="IDPizza" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tamanopizza" class="pizzerias.Tamanopizza" fetch="select">
+            <column name="IDTamanoPizza" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipopizza" class="pizzerias.Tipopizza" fetch="select">
+            <column name="IDTipoPizza" not-null="true" />
+        </many-to-one>
+        <many-to-one name="variedadpizza" class="pizzerias.Variedadpizza" fetch="select">
+            <column name="IDVariedadPizza" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="156" not-null="true" />
+        </property>
+        <property name="precio" type="float">
+            <column name="precio" precision="11" not-null="true" />
+        </property>
+        <set name="detallepedidos" table="detallepedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDPizza" not-null="true" />
+            </key>
+            <one-to-many class="pizzerias.Detallepedido" />
+        </set>
+    </class>
+</hibernate-mapping>

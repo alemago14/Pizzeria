@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/05/2021 17:41:03 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pizzerias.Pedido" table="pedido" catalog="pizzeria" optimistic-lock="version">
+        <id name="idpedido" type="int">
+            <column name="IDPedido" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="estadopedido" class="pizzerias.Estadopedido" fetch="select">
+            <column name="IDEstadoPedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="factura" class="pizzerias.Factura" fetch="select">
+            <column name="IDFactura" not-null="true" />
+        </many-to-one>
+        <property name="fechaHoraCracion" type="timestamp">
+            <column name="fechaHoraCracion" length="19" not-null="true" />
+        </property>
+        <property name="fechaHoraEntrega" type="timestamp">
+            <column name="fechaHoraEntrega" length="19" not-null="true" />
+        </property>
+        <property name="nombreCliente" type="string">
+            <column name="nombreCliente" length="156" not-null="true" />
+        </property>
+        <set name="detallepedidos" table="detallepedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDPedido" not-null="true" />
+            </key>
+            <one-to-many class="pizzerias.Detallepedido" />
+        </set>
+    </class>
+</hibernate-mapping>

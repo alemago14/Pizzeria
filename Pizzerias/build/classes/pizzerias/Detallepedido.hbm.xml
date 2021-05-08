@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/05/2021 17:41:03 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pizzerias.Detallepedido" table="detallepedido" catalog="pizzeria" optimistic-lock="version">
+        <id name="iddetallePedido" type="int">
+            <column name="IDDetallePedido" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="estadofactura" class="pizzerias.Estadofactura" fetch="select">
+            <column name="IDEstadoPedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="factura" class="pizzerias.Factura" fetch="select">
+            <column name="IDFactura" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pedido" class="pizzerias.Pedido" fetch="select">
+            <column name="IDPedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pizza" class="pizzerias.Pizza" fetch="select">
+            <column name="IDPizza" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="precio" type="float">
+            <column name="precio" precision="11" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
