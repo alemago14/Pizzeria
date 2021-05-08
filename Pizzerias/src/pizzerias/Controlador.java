@@ -16,7 +16,7 @@ import org.hibernate.Session;
 
 /**
  *
- * @author Maugouber
+ * @author ale
  */
 public class Controlador {
     //Atributos
